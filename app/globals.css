@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* Light only, on purpose. Warm paper ground, white cards, one accent. */
+/* withone.ai tokens: ivory surface, charcoal ink, one brand accent.
+   Yellow marks the brand and what the agent wrote; red is a genuine failure.
+   Everything else is the neutral ramp. Light only, on purpose. */
+@theme {
+  --color-paper: #fafaf7;
+  --color-card: #ffffff;
+  --color-sunken: #efefeb;
+  --color-line: #e4e4df;
+  --color-line-strong: #cfcfca;
+  --color-ink: #191919;
+  --color-ink-2: #55554f;
+  --color-muted: #656562;
+  --color-faint: #92928f;
+  --color-accent: #8a6d0f;
+  --color-accent-soft: #fbf3d9;
+  --color-lime: #f3c747;
+  --color-warn: #8a6d0f;
+  --color-warn-soft: #fbf3d9;
+  --color-bad: #cd5247;
+  --color-bad-soft: #fbeeec;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-lora), Georgia, serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --shadow-card: 0 1px 2px rgb(25 25 25 / 0.04), 0 1px 1px rgb(25 25 25 / 0.03);
+  --shadow-lift: 0 8px 28px -10px rgb(25 25 25 / 0.16), 0 2px 6px rgb(25 25 25 / 0.05);
+}
+
+html, body { height: 100%; }
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  color-scheme: light;
+}
+
+::selection { background: #f8e7a8; }
+
+/* Assistant prose */
+.prose-agent { font-size: 15px; line-height: 1.65; color: var(--color-ink); }
+.prose-agent > * + * { margin-top: 0.7em; }
+.prose-agent h1, .prose-agent h2, .prose-agent h3 { font-weight: 600; letter-spacing: -0.01em; margin-top: 1.1em; }
+.prose-agent h1 { font-size: 1.15em; } .prose-agent h2 { font-size: 1.08em; } .prose-agent h3 { font-size: 1em; }
+.prose-agent ul { list-style: disc; padding-left: 1.25em; }
+.prose-agent ol { list-style: decimal; padding-left: 1.4em; }
+.prose-agent li + li { margin-top: 0.25em; }
+.prose-agent a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
+.prose-agent strong { font-weight: 600; }
+.prose-agent code { font-family: var(--font-mono); font-size: 0.86em; background: var(--color-sunken); padding: 0.1em 0.35em; border-radius: 5px; }
+.prose-agent pre { background: var(--color-sunken); border: 1px solid var(--color-line); border-radius: 10px; padding: 12px 14px; overflow-x: auto; font-size: 13px; }
+.prose-agent pre code { background: none; padding: 0; }
+.prose-agent blockquote { border-left: 3px solid var(--color-line-strong); padding-left: 12px; color: var(--color-ink-2); }
+.prose-agent .table-wrap { border: 1px solid var(--color-line); border-radius: 10px; overflow-x: auto; }
+.prose-agent table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.prose-agent th { text-align: left; font-weight: 600; background: var(--color-sunken); color: var(--color-ink-2); }
+.prose-agent th, .prose-agent td { padding: 8px 12px; border-bottom: 1px solid var(--color-line); white-space: nowrap; }
+.prose-agent tr:last-child td { border-bottom: 0; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes pulse-dot { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+.dot { animation: pulse-dot 1.2s ease-in-out infinite; }
+.dot:nth-child(2) { animation-delay: 0.15s; } .dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+.shimmer-text {
+  background: linear-gradient(90deg, var(--color-muted) 30%, var(--color-ink) 50%, var(--color-muted) 70%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 2.2s linear infinite;
+}
+
+.scroll-thin { scrollbar-width: thin; scrollbar-color: var(--color-line-strong) transparent; }
+
+/* Micro-labels: DM Mono, uppercase, the site's section-label voice. */
+.micro { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--color-faint); font-weight: 400; }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Demo notice. Hidden in a configured deploy. */
+.banner { background: var(--color-sunken); border-bottom: 1px solid var(--color-line); color: var(--color-muted); font-size: 12.5px; padding: 9px 16px; text-align: center; }
+.banner code { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-ink); }
+.banner a { color: var(--color-accent); font-weight: 500; }
